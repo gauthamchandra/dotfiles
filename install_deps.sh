@@ -15,3 +15,7 @@ brew install the_silver_searcher
 echo "Installing JDK"
 brew update
 brew cask install java
+
+echo "Installing Android SDK"
+brew tap caskroom/cask
+brew cask install android-sdk
