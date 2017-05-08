@@ -1,0 +1,19 @@
+# ~/.tmuxinator/gh-dev.yml
+
+name: gh-dev
+root: ~/development/greenhouse
+
+# Runs before everything. Use it to start daemons etc.
+# pre: sudo /etc/rc.d/mysqld start
+
+# Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
+# pre_window: rbenv shell 2.0.0-p247
+
+# Attaches immediately after session creation 
+attach: true 
+
+windows:
+  - git: gs
+  - gh: vim . 
+  - android: jump gh-android
+  - logs: tail -f log/development.log
