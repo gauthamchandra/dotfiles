@@ -1,7 +1,6 @@
 #!/bin/bash
 set -e
 
-
 echo "Installing tmux"
 brew install tmux
 

@@ -1,0 +1,15 @@
+[user]
+	name = Gautham Chandra
+	email = gautham.chandra@greenhouse.io
+[core]
+	excludesfile = /Users/gautham.chandra/.gitignore_global
+[filter "lfs"]
+	clean = git lfs clean %f
+	smudge = git lfs smudge %f
+	required = true
+[rerere]
+	enabled = true
+[push]
+	default = current
+[url "https://"]
+	insteadOf = git://
