@@ -122,6 +122,10 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
+" Make NERDtree show hidden files but not swap files
+let NERDTreeShowHidden=1
+let NERDTreeIgnore = ['\.swp$']
+
 " For AG
 let g:ag_working_path_mode='r'
 
