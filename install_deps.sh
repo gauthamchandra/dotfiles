@@ -19,3 +19,10 @@ brew cask install java
 echo "Installing Android SDK"
 brew tap caskroom/cask
 brew cask install android-sdk
+
+echo "Installing Node and n"
+brew install nodejs
+npm install -g n
+
+echo "Installing a notifier for growl notifications when something finishes in terminal"
+brew install terminal-notifier
