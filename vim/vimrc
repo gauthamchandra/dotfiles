@@ -1,7 +1,10 @@
 " My Beloved Vimrc file.
 
 " enable clipboard register
-set clipboard=unnamed
+" but only do so if not inside tmux as it has its own clipboard buffer logic
+if $TMUX ==? ''
+  set clipboard+=unnamed
+endif
 
 " Needed for Vundle (a plugin manager)
 filetype off
