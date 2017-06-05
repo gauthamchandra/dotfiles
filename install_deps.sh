@@ -1,4 +1,5 @@
 #!/bin/sh
+set -e
 
 echo "Installing the command line tools packaged with Xcode"
 xcode-select --install
@@ -24,5 +25,5 @@ echo "Installing Node and n"
 brew install nodejs
 npm install -g n
 
-echo "Installing a notifier for growl notifications when something finishes in terminal"
-brew install terminal-notifier
+echo "Installing 'reattach-to-user-namespace' to be able to access clipboard in tmux"
+brew install reattach-to-user-namespace --wrap-pbcopy-and-pbpaste

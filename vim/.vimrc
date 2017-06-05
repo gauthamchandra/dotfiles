@@ -7,9 +7,7 @@ end
 
 " enable clipboard register
 " but only do so if not inside tmux as it has its own clipboard buffer logic
-if $TMUX ==? ''
-  set clipboard=unnamedplus
-endif
+set clipboard+=unnamedplus
 
 " the plugin manager installation and some of the plugins themselves are meant for neovim, not vanilla vim
 " so don't run this if running in plain vim
