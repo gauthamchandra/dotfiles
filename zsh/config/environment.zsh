@@ -22,8 +22,14 @@ if [ -f "$TMUXINATOR_COMPLETION_FILE" ]; then
   source $TMUXINATOR_COMPLETION_FILE 
 fi
 
+if command -v nvim >/dev/null 2>&1; then
+  alias vim="`which nvim`"
+  export EDITOR='nvim'
+else
+  export EDITOR='vim'
+fi
+
 export DEFAULT_USER=`whoami`
-export EDITOR='vim'
 prompt_context() {}
 
 JAVA_HOME=`/usr/libexec/java_home`
