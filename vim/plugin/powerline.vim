@@ -1,6 +1,8 @@
-" Let airline populate the powerline symbols
-let g:airline_theme='onedark'
-let g:airline_powerline_fonts = 1
+" Set lightline theme for statusbar and tell tmux status to match
+let g:lightline = {
+  \ 'colorscheme': 'one',
+  \ }
+Tmuxline lightline
 
 " Reduce timeout after pressing escape to something reasonable
 if ! has('gui_running')

@@ -35,8 +35,7 @@ if s:running_neovim
   Plug 'airblade/vim-gitgutter'
   
   " For nicer status line UI and theme
-  Plug 'vim-airline/vim-airline'
-  Plug 'vim-airline/vim-airline-themes'
+  Plug 'itchyny/lightline.vim'
   Plug 'edkolev/tmuxline.vim'
   Plug 'rakr/vim-one'
   
