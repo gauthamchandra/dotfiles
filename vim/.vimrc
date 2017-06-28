@@ -29,6 +29,7 @@ if s:running_neovim
   Plug 'scrooloose/nerdtree' 
   Plug 'ctrlpvim/ctrlp.vim'
   Plug 'ivalkeen/vim-ctrlp-tjump'
+  Plug 'lokikl/vim-ctrlp-ag'
   
   " got git?
   Plug 'tpope/vim-fugitive'
