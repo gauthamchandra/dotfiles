@@ -5,9 +5,11 @@ augroup neomake
   autocmd! BufWritePost * Neomake
 augroup END
 
-let g:neomake_javascript_enabled_makers = ['eslint']
-let g:neomake_ruby_enabled_markers = ['rubocop']
-let g:neomake_vim_enabled_markers = ['vint']
+" Open the issue list by default
+let g:neomake_open_list=0
 
-let rubocop_config = '/Users/gautham.chandra/development/greenhouse/.rubocop.yml'
-let g:neomake_ruby_rubocop_maker = { 'args': ['-c', rubocop_config] }
+" Enable the relevant linters
+let g:neomake_javascript_enabled_makers = ['eslint']
+let g:neomake_jsx_enabled_makers = ['eslint']
+let g:neomake_vim_enabled_markers = ['vint']
+let g:neomake_logfile = '/usr/local/var/log/neomake.log'
