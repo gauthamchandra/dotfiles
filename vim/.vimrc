@@ -43,6 +43,9 @@ if s:running_neovim
   " For proper syntax highlighting 
   Plug 'pangloss/vim-javascript'
   Plug 'mxw/vim-jsx'
+
+  " Utils
+  Plug 'AndrewRadev/linediff.vim'
   
   " All vim-plug plugins should be before this!
   " Initialize plugin system
