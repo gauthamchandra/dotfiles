@@ -24,6 +24,7 @@ if s:running_neovim
   Plug 'ludovicchabant/vim-gutentags'
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
   Plug 'fishbullet/deoplete-ruby'
+  Plug 'artur-shaik/vim-javacomplete2'
   
   " Search, Browsing and files
   Plug 'scrooloose/nerdtree' 
