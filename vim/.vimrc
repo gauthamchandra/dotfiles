@@ -25,6 +25,7 @@ if s:running_neovim
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
   Plug 'fishbullet/deoplete-ruby'
   Plug 'artur-shaik/vim-javacomplete2'
+  Plug 'tsiemens/vim-aftercolors'
   
   " Search, Browsing and files
   Plug 'scrooloose/nerdtree' 
