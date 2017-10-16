@@ -2,7 +2,10 @@
 let g:lightline = {
   \ 'colorscheme': 'one',
   \ }
-Tmuxline lightline
+
+if exists('$TMUX')
+  Tmuxline lightline
+endif
 
 " Reduce timeout after pressing escape to something reasonable
 if ! has('gui_running')
