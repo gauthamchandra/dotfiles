@@ -12,3 +12,4 @@ alias rlint="git diff --name-only | grep -G '.*\.rb' |  xargs rubocop"
 
 export UNICORN_TIMEOUT=10000000000000;
 export UNICORN_WORKERS=3;
+export DB_POOL=25
