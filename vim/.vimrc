@@ -29,6 +29,14 @@ if s:running_neovim
   Plug 'fishbullet/deoplete-ruby'
   Plug 'artur-shaik/vim-javacomplete2'
   Plug 'tsiemens/vim-aftercolors'
+  Plug 'flowtype/vim-flow', {
+    \ 'autoload': {
+    \   'filetypes': 'javascript'
+    \ },
+    \ 'build': {
+    \     'mac': 'npm install -g flow-bin',
+    \     'unix': 'npm install -g flow-bin'
+    \ }}
   
   " Search, Browsing and files
   Plug 'scrooloose/nerdtree' 
