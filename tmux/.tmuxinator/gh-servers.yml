@@ -9,7 +9,7 @@ root: ~/development/greenhouse
 # 1) Pull latest changes down from master and rebase
 # 2) Install any missing gems via bundle
 # 3) Run migrations
-pre: ~/development/setup-scripts/pull-down-work-changes.sh
+on_project_first_start: ~/development/setup-scripts/pull-down-work-changes.sh
 
 # Don't attach automatically to session after its setup
 attach: false
