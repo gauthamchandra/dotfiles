@@ -3,6 +3,9 @@
 # Initialize rbenv
 eval "$(rbenv init -)"
 
+# Specify OpenSSL cert location for ruby
+export SSL_CERT_FILE=/usr/local/etc/openssl/cert.pem
+
 # General Rails stuff
 alias rspec="bundle exec rspec"
 alias rake="bundle exec rake"
