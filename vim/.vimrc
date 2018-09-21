@@ -50,6 +50,9 @@ if s:running_neovim
   Plug 'pangloss/vim-javascript'
   Plug 'mxw/vim-jsx'
 
+  " For developer metrics
+  Plug 'wakatime/vim-wakatime'
+
   " Utils
   Plug 'AndrewRadev/linediff.vim'
   
