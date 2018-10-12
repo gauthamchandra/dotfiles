@@ -4,6 +4,10 @@ gcgrep() {
   grep -R -i --exclude "*.log" --binary-files=without-match "$1" $DEFAULT_SEARCH_DIR
 }
 
+start_fresh() {
+  gpr && bundle && ./yarn.sh && rake db:local:migrate && rake db:seed && rails s
+}
+
 #Zeus for preloading parts of the app for faster rspec tests
 ze () { ARGS=$@; zeus $@; ZE_EC=$?; stty sane; if [ $ZE_EC = 2 ]; then ze $ARGS; fi } 
 

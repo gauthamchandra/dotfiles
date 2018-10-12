@@ -19,7 +19,7 @@ windows:
       layout: even-horizontal 
       panes:
         - rails s 
-        - solr-start
+        - solr_start
         - sidekiq
   - rspec:
       layout: even-horizontal
