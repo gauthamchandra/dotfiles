@@ -1,0 +1,42 @@
+" Xcode XVim2 config
+" - To make working in Xcode just a little bit more bareable
+
+" share system clipboard with the unnamed register
+set clipboard=unnamed
+
+" Change tabs to spaces so everything is consisent formatting wise
+set expandtab
+
+" Use case insensitive search, except when using capital letters
+set ignorecase
+set smartcase
+
+" If no file-type specific indenting is enabled, just use the indenting inherent to the file
+set autoindent
+
+" Indentation using hard tabs or softtabs of 2 spaces 
+set shiftwidth=2
+set tabstop=2
+set shiftround
+set expandtab
+
+" For easier window management 
+" move between assistant editors easily
+inoremap  <Up>     <NOP>
+inoremap  <Down>   <NOP>
+inoremap  <Left>   <NOP>
+inoremap  <Right>  <NOP>
+nnoremap  <Up>     <C-w>k
+nnoremap  <Down>   <C-w>j
+nnoremap  <Left>   <C-w>h
+nnoremap  <Right>  <C-w>l
+
+" Toggles navigator menu on the left hand side
+" Toggles the developer console on the right
+nnoremap <S-Left> :xccmd toggleNavigatorsVisibility<CR>
+nnoremap <S-Down> :xccmd toggleDebuggerVisibility<CR>
+
+" Navigation shortcuts
+nnoremap <C-[> :xccmd goBackInHistoryByCommand<CR>
+nnoremap <C-]> :xccmd goForwardInHistoryByCommand<CR>
+vnoremap <C-]> :xccmd jumpToDefinition<CR>

@@ -14,12 +14,19 @@ echo "Installing external zsh plugin dependencies"
 pip install thefuck
 brew install git hub jump
 
+echo "Symlinking useful scripts to ~/bin"
+mkdir -p ~/bin/
+ln -s $SCRIPT_DIR/scripts/swift/swiftrun.sh ~/bin/swiftrun.sh
+
 echo "Downloading and installing powerline appropriate fonts for the `agnoster` theme"
 git clone https://github.com/powerline/fonts.git
 cd fonts && ./install.sh && cd .. && rm -rf fonts
 
 echo "Adding config to .zshrc"
 echo "ZSH_CUSTOM=${SCRIPT_DIR}/config" >> ~/.zshrc
+
+echo "Adding ~/bin to .zshrc"
+echo "export PATH=$PATH:~/bin" >> ~/.zshrc
 
 echo "Sourcing file"
 source ~/.zshrc

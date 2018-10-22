@@ -30,6 +30,9 @@ if s:running_neovim
   Plug 'artur-shaik/vim-javacomplete2'
   Plug 'tsiemens/vim-aftercolors'
   Plug 'wokalski/autocomplete-flow'
+  Plug 'mitsuse/autocomplete-swift'
+  Plug 'landaire/deoplete-swift'
+  Plug 'skywind3000/asyncrun.vim'
   
   " Search, Browsing and files
   Plug 'scrooloose/nerdtree' 
@@ -49,6 +52,7 @@ if s:running_neovim
   " For proper syntax highlighting 
   Plug 'pangloss/vim-javascript'
   Plug 'mxw/vim-jsx'
+  Plug 'keith/swift.vim'
 
   " For developer metrics
   Plug 'wakatime/vim-wakatime'

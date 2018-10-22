@@ -22,11 +22,18 @@ cd $SCRIPT_DIR
 echo "Symlinking 'init.vim' => ~/.config/nvim/init.vim"
 mkdir -p ${NVIM_CONFIG_DIR} && ln -s `pwd`/init.vim ${NVIM_CONFIG_DIR}/init.vim
 
-echo "Symlinking dir  => ~/.vim/"
+echo "Symlinking dir => ~/.vim/"
 ln -s `pwd` ~/.vim
 
+echo "Symlinking xvimrc => ~/.xvimrc (for Xcode)"
+chmod +x `pwd`/.xvimrc
+ln -s `pwd`/.xvimrc ~/.xvimrc
+
 echo "Installing plugin dependencies"
+pip install typing # used for vim-vint
 pip install vim-vint
+brew install sourcekitten # used for autocomplete-swift
+pip install pyyaml
 
 echo "Installing ctags and adding basic config to ~/.ctags"
 brew install ctags
@@ -35,6 +42,7 @@ ln -s `pwd`/.ctags ~/.ctags
 echo "Installing linters so it can be used for vim via neomake"
 npm install -g eslint
 gem install rubocop
+brew install swiftlint
 
 echo "Installing Plugins..."
 nvim +PlugInstall +qall
