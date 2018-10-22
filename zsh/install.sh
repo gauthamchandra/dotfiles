@@ -11,7 +11,6 @@ pip install --upgrade pip setuptools
 pip install powerline-status
 
 echo "Installing external zsh plugin dependencies"
-pip install thefuck
 brew install git hub jump
 
 echo "Symlinking useful scripts to ~/bin"

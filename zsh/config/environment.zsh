@@ -33,6 +33,3 @@ export DEFAULT_USER=`whoami`
 prompt_context() {}
 
 JAVA_HOME=`/usr/libexec/java_home`
-
-# Add thefuck to shell
-eval "$(thefuck --alias)"
