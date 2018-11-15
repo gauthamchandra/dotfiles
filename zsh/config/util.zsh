@@ -38,4 +38,4 @@ repeat_command() {
   for i in {1..$RETRIES}; do eval $COMMAND; sleep $PAUSE_INTERVAL; done
 }
 
-alias clear-vim-swaps='find ./ -type f -name "\.*sw[klmnop]" -delete'
+alias clear-vim-swaps='ls  ~/.local/share/nvim/swap | grep ".swp" | xargs -I swap_file rm ~/.local/share/nvim/swap/swap_file'
