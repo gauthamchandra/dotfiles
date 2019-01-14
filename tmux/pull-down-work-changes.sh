@@ -40,13 +40,16 @@ rebase_off_master() {
   fi
 
   logInfo "Pulling down latest changes for master and rebasing..."
-  git checkout master && git pull --rebase && git checkout  - && git rebase master
+  git fetch && git rebase origin/master  
 
   logInfo "Installing any gems needed"
   bundle
 
+  logInfo "Updating npm dependencies"
+  ./yarn.sh
+
   logInfo "Running migrations..."
-  rake db:local:migrate
+  rake db:local:migrate && rake db:seed
 
   if [ "$LOCAL_CHANGES" = true ]; then
     logInfo "Restoring the local changes that were stashed..."
@@ -62,7 +65,6 @@ rebase_off_master() {
 }
 
 #=================================
-
 logInfo "Initializing RVM as a function..."
 load_rvm_as_function
 
@@ -78,4 +80,9 @@ if [[ "$NO_REBASE" = true ]]; then
   logInfo "\$NO_REBASE=true, skipping pulling changes from master"
 else
   rebase_off_master
+fi
+
+if command -v nginx-start >/dev/null; then
+  logInfo "Attempting to bind Nginx to port 80, you will be prompted for sudo access"
+  nginx-start
 fi
