@@ -4,6 +4,11 @@ set -e
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 MAXFILES_PLIST_LOCATION=/Library/LaunchDaemons/limit.maxfiles.plist
 MAXPROC_PLIST_LOCATION=/Library/LaunchDaemons/limit.maxproc.plist
+SSH_CONFIG_LOCATION=~/.ssh/config
+
+is_mac_os() {
+  "$(uname)" == "Darwin"
+}
 
 echo "Configuring Finder to show all files (including hidden)"
 defaults write com.apple.finder AppleShowAllFiles YES
@@ -26,4 +31,19 @@ else
   sudo cp $SCRIPT_DIR/limit.maxproc.plist $MAXPROC_PLIST_LOCATION 
   sudo chown -R root:wheel $MAXPROC_PLIST_LOCATION 
   sudo launchctl load /Library $MAXPROC_PLIST_LOCATION
+fi
+
+if is_mac_os; then
+  echo "Mac OS detected. Checking if SSH config exists."
+  echo "If it doesn't, some basic defaults will be copied like saving the private key to the Keychain"
+
+  if test -f $SSH_CONFIG_LOCATION; then
+    echo "SSH config file already exists! Skipping"
+  else
+    echo "Copying default SSH config over"
+    cp $SCRIPT_DIR/mac_ssh_default_config $SSH_CONFIG_LOCATION    
+
+    echo "Telling SSH Agent to store the key in the Keychain so you won't get prompted on every boot"
+    ssh-add -K ~/.ssh/id_rsa
+  fi
 fi
