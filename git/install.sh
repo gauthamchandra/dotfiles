@@ -10,3 +10,6 @@ ln -s ${SCRIPT_DIR}/.gitignore_global ~/.gitignore_global
 
 echo "Telling git that"
 git config --global core.excludesfile ~/.gitignore_global
+
+echo "Set default global commit hooks to our hooks dir"
+git config --global core.hooksPath $SCRIPT_DIR/hooks/
