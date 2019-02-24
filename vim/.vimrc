@@ -28,7 +28,6 @@ if s:running_neovim
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
   Plug 'fishbullet/deoplete-ruby'
   Plug 'artur-shaik/vim-javacomplete2'
-  Plug 'tsiemens/vim-aftercolors'
   Plug 'wokalski/autocomplete-flow'
   Plug 'mitsuse/autocomplete-swift'
   Plug 'landaire/deoplete-swift'
@@ -47,7 +46,7 @@ if s:running_neovim
   " For nicer status line UI and theme
   Plug 'itchyny/lightline.vim'
   Plug 'edkolev/tmuxline.vim'
-  Plug 'rakr/vim-one'
+  Plug 'connorholyday/vim-snazzy'
   
   " For proper syntax highlighting 
   Plug 'pangloss/vim-javascript'

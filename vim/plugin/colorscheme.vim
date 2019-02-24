@@ -1,2 +1,1 @@
-colorscheme one
-set background=dark
+colorscheme snazzy
