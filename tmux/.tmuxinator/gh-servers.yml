@@ -19,8 +19,8 @@ windows:
       layout: even-horizontal 
       panes:
         - rails s 
-        - solr_start
-        - sidekiq
+        - solr_start && sidekiq
+        - jump jben && bundle exec puma -C config/puma.rb
   - rspec:
       layout: even-horizontal
       panes:
