@@ -1,3 +1,8 @@
+# just a quick function to re-source .zshrc
+src() {
+  source $HOME/.zshrc
+}
+
 # For fast searching through files
 gcgrep() {
   DEFAULT_SEARCH_DIR=${2:-"*"}

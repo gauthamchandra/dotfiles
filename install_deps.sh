@@ -1,29 +1,36 @@
 #!/bin/sh
-set -e
+set -euo pipefail
 
-echo "Installing the command line tools packaged with Xcode"
-xcode-select --install
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-echo "Accepting licenses"
+# bring in the utility functions
+source $SCRIPT_DIR/util.sh 
+
+if xcode-select -p; then
+  logInfo "Command line tools already installed. Skipping"
+else
+  logInfo "Installing the command line tools packaged with Xcode"
+  xcode-select --install
+fi
+
+logInfo "Accepting licenses"
 sudo xcodebuild -license accept
 
-echo "Explicitely selecting the correct installation of Xcode to avoid install issues with other deps"
+logInfo "Explicitely selecting the correct installation of Xcode to avoid install issues with other deps"
 sudo xcode-select -switch /Applications/Xcode.app/Contents/Developer
 
-echo "Installing Ag"
-brew install the_silver_searcher
+if which brew; then
+  logInfo "Brew installed. Skipping installation"
+else
+  logInfo "Brew not detected. Installing Homebrew"
+  # taken from the brew.sh site
+  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+fi;
 
-echo "Installing JDK"
-brew update
-brew cask install java
+if [ ! -f $HOME/Brewfile ]; then
+  logInfo "Copying over the Brewfile to $HOME"
+  ln -s $SCRIPT_DIR/Brewfile $HOME/Brewfile
+fi
 
-echo "Installing Android SDK"
-brew tap caskroom/cask
-brew cask install android-sdk
-
-echo "Installing Node and n"
-brew install nodejs
-npm install -g n
-
-echo "Installing 'reattach-to-user-namespace' to be able to access clipboard in tmux"
-brew install reattach-to-user-namespace --wrap-pbcopy-and-pbpaste
+logInfo "Installing all brew dependencies..."
+cd $HOME && brew bundle

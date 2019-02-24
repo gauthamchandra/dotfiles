@@ -5,12 +5,6 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 cd $SCRIPT_DIR
 
-echo "Installing tmux"
-brew install tmux
-
-echo "Installing reattach-to-user-namespace for monkey patching copy/paste functionality"
-brew install reattach-to-user-namespace
-
 echo "Installing tmuxinator"
 gem install tmuxinator
 
