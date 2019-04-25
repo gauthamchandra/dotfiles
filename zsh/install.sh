@@ -24,7 +24,7 @@ function install_deps() {
   cd fonts && ./install.sh && cd .. && rm -rf fonts
 
   logInfo "Setting the default shell to zsh. You maybe prompted for sudo access"
-  chsh -s =zsh
+  chsh -s $(which zsh)
 }
 
 function install_zim() {
@@ -68,10 +68,16 @@ function configure_autosourcer() {
   echo -e "\n" >> $HOME/.zshrc
 }
 
+function symlink_zimrc() {
+  logInfo "Symlinking .zimrc -> ~/.zimrc"
+  ln -s $SCRIPT_DIR/.zimrc $HOME/.zimrc
+}
+
 install_deps
 install_zim
 configure_autocompletion
 configure_autosourcer
+symlink_zimrc
 
 logInfo "Adding config to .zshrc"
 echo "ZSH_CUSTOM=${SCRIPT_DIR}/config" >> $HOME/.zshrc
