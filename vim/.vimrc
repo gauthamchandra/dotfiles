@@ -46,7 +46,7 @@ if s:running_neovim
   " For nicer status line UI and theme
   Plug 'itchyny/lightline.vim'
   Plug 'edkolev/tmuxline.vim'
-  Plug 'connorholyday/vim-snazzy'
+  Plug 'jacoborus/tender.vim'
   
   " For proper syntax highlighting 
   Plug 'pangloss/vim-javascript'

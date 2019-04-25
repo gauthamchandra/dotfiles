@@ -13,9 +13,6 @@ start_fresh() {
   gpr && bundle && ./yarn.sh && rake db:local:migrate && rake db:seed && rails s
 }
 
-#Zeus for preloading parts of the app for faster rspec tests
-ze () { ARGS=$@; zeus $@; ZE_EC=$?; stty sane; if [ $ZE_EC = 2 ]; then ze $ARGS; fi } 
-
 # Retries a command a specified number of times but stops early if
 # it succeeds
 retry () {

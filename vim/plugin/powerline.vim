@@ -1,6 +1,6 @@
 " Set lightline theme for statusbar and tell tmux status to match
 let g:lightline = {
-  \ 'colorscheme': 'snazzy',
+  \ 'colorscheme': 'tender',
   \ }
 
 if exists('$TMUX')

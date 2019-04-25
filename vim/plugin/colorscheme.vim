@@ -1,1 +1,1 @@
-colorscheme snazzy
+colorscheme tender 

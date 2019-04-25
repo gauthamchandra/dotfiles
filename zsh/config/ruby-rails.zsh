@@ -9,6 +9,7 @@ export SSL_CERT_FILE=/usr/local/etc/openssl/cert.pem
 # General Rails stuff
 alias rspec="bundle exec rspec"
 alias rake="bundle exec rake"
+alias ze="DISABLE_BOOTSNAP=1 zeus"
 
 # Some useful aliases
 alias rlint="git diff --name-only | grep -G '.*\.rb' |  xargs rubocop"

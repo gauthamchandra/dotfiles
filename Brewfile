@@ -14,6 +14,7 @@ brew "carthage"
 brew "ctags"
 brew "ghostscript"
 brew "git"
+brew "git-when-merged"
 brew "hub"
 brew "imagemagick"
 brew "memcached", restart_service: true
