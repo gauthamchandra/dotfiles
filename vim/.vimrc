@@ -26,12 +26,14 @@ if s:running_neovim
   Plug 'editorconfig/editorconfig-vim'
   Plug 'ludovicchabant/vim-gutentags'
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'ensime/ensime-vim', { 'do': ':UpdateRemotePlugins' }
   Plug 'fishbullet/deoplete-ruby'
   Plug 'artur-shaik/vim-javacomplete2'
   Plug 'wokalski/autocomplete-flow'
   Plug 'mitsuse/autocomplete-swift'
   Plug 'landaire/deoplete-swift'
   Plug 'skywind3000/asyncrun.vim'
+  Plug 'prettier/vim-prettier', { 'do': 'npm  install' }
   
   " Search, Browsing and files
   Plug 'scrooloose/nerdtree' 

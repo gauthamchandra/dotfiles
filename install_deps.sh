@@ -34,3 +34,6 @@ fi
 
 logInfo "Installing all brew dependencies..."
 cd $HOME && brew bundle
+
+logInfo "Be sure to run 'rbenv init' and follow the instructions to setup rbenv"
+logInfo "Done"

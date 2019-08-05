@@ -29,7 +29,7 @@ function install_deps() {
 
 function install_zim() {
   logInfo "Installing and configuring zim for a superior Zsh experience"
-  zsh && source install_zim.zsh
+  zsh && source $SCRIPT_DIR/install_zim.zsh
 }
 
 function configure_autocompletion() {

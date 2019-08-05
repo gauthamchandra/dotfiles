@@ -1,6 +1,6 @@
 [user]
 	name = Gautham Chandra
-	email = gautham.chandra@greenhouse.io
+	email = gchandra@dataminr.com
 [core]
 	excludesfile = /Users/gautham.chandra/.gitignore_global
 [filter "lfs"]

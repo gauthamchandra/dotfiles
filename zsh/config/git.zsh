@@ -1,5 +1,6 @@
-# Alias hub as git
-eval "$(hub alias -s)"
+# Alias lab as git which is a wrapper for both hub (github) and git
+# and adds gitlab features in a nice CLI.
+alias git=lab
 
 alias gpr='git pull --rebase'
 alias gprr='gpr && git submodule update --init --recursive'

@@ -25,6 +25,10 @@ mkdir -p ${NVIM_CONFIG_DIR} && ln -s `pwd`/init.vim ${NVIM_CONFIG_DIR}/init.vim
 echo "Symlinking dir => ~/.vim/"
 ln -s `pwd` ~/.vim
 
+echo "Symlinking .vimrc => ~/.vimrc"
+chmod +x `pwd`/.vimrc
+ln -s `pwd`/.vimrc ~/.vimrc
+
 echo "Symlinking xvimrc => ~/.xvimrc (for Xcode)"
 chmod +x `pwd`/.xvimrc
 ln -s `pwd`/.xvimrc ~/.xvimrc
@@ -34,6 +38,11 @@ pip install typing # used for vim-vint
 pip install vim-vint
 brew install sourcekitten # used for autocomplete-swift
 pip install pyyaml
+pip3 install sexpdata websocket-client # used for ensime (scala)
+
+echo "Ensuring that SBT ensime plugin for Scala is installed"
+mkdir -p ~/.sbt/1.0/plugins && touch ~/.sbt/1.0/plugins/plugins.sbt
+echo 'addSbtPlugin("org.ensime" % "sbt-ensime" % "2.5.1")' >> ~/.sbt/1.0/plugins/plugins.sbt
 
 echo "Installing ctags and adding basic config to ~/.ctags"
 brew install ctags
@@ -44,8 +53,12 @@ npm install -g eslint
 gem install rubocop
 brew install swiftlint
 
+echo "Installing vim-plug"
+curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
 echo "Installing Plugins..."
-nvim +PlugInstall +qall
+nvim +PlugInstall +UpdateRemotePlugins +qall
 
 echo "Setting vimrc as executable"
 chmod +x vimrc
