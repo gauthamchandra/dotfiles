@@ -1,7 +1,7 @@
 # ~/.tmuxinator/gh-dev.yml
 
-name: gh-dev
-root: ~/development/greenhouse
+name: dm-dev
+root: <%= @settings["workspace"] %>
 
 # Runs before everything. Use it to start daemons etc.
 # pre: sudo /etc/rc.d/mysqld start
@@ -14,6 +14,5 @@ attach: true
 
 windows:
   - git: gs
-  - gh: vim . 
-  - android: jump gh-android
-  - logs: tail -f log/development.log
+  - ghost: vim . 
+  - stream-api: jump stream 

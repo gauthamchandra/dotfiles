@@ -22,4 +22,4 @@ gco-grep() {
 }
 
 # For deleting any local branches that have already been merged on remote
-alias gprune-merged='git branch --merged | grep -v -e "master" -e "develop" | xargs -n 1 git branch -d'
+alias gprune-merged='git branch --merged | grep -v -e "master" -e "develop" -e "stage" | xargs -n 1 git branch -d'

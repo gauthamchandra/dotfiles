@@ -35,4 +35,4 @@ fi
 export DEFAULT_USER=`whoami`
 prompt_context() {}
 
-JAVA_HOME=`/usr/libexec/java_home`
+export JAVA_HOME=`/usr/libexec/java_home -v 1.8`

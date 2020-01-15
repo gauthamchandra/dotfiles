@@ -6,3 +6,4 @@ export ANDROID_HOME=/usr/local/share/android-sdk
 export ANDROID_SDK_HOME=$ANDROID_HOME
 export ANDROID_AVD_HOME=$HOME/.android/avd/
 export PATH=$PATH:$ANDROID_HOME/tools/bin
+export PATH=$PATH:$ANDROID_HOME/platform-tools

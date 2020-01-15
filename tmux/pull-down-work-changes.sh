@@ -12,12 +12,6 @@ logError() {
   echo -e "${RED}$1${NO_COLOR}"
 }
 
-# RVM is loaded as a binary but this setup is lost in a script.
-# it needs to be reloaded as a script
-load_rvm_as_function() {
-  [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
-}
-
 any_local_changes() {
   git diff --quiet HEAD
   return $? 
@@ -42,14 +36,8 @@ rebase_off_master() {
   logInfo "Pulling down latest changes for master and rebasing..."
   git fetch && git rebase origin/master  
 
-  logInfo "Installing any gems needed"
-  bundle
-
-  logInfo "Updating npm dependencies"
-  ./yarn.sh
-
-  logInfo "Running migrations..."
-  rake db:local:migrate && rake db:seed
+  logInfo "Installing dependencies"
+  npm install
 
   if [ "$LOCAL_CHANGES" = true ]; then
     logInfo "Restoring the local changes that were stashed..."
@@ -65,11 +53,8 @@ rebase_off_master() {
 }
 
 #=================================
-logInfo "Initializing RVM as a function..."
-load_rvm_as_function
-
 logInfo "Switching to work directory..."
-cd ~/development/greenhouse
+cd $WORK_DIRECTORY
 
 if [ $? != 0 ]; then
   logError "Directory configured in script is invalid"
@@ -80,9 +65,4 @@ if [[ "$NO_REBASE" = true ]]; then
   logInfo "\$NO_REBASE=true, skipping pulling changes from master"
 else
   rebase_off_master
-fi
-
-if command -v nginx-start >/dev/null; then
-  logInfo "Attempting to bind Nginx to port 80, you will be prompted for sudo access"
-  nginx-start
 fi

@@ -29,11 +29,13 @@ if s:running_neovim
   Plug 'ensime/ensime-vim', { 'do': ':UpdateRemotePlugins' }
   Plug 'fishbullet/deoplete-ruby'
   Plug 'artur-shaik/vim-javacomplete2'
-  Plug 'wokalski/autocomplete-flow'
   Plug 'mitsuse/autocomplete-swift'
   Plug 'landaire/deoplete-swift'
+  Plug 'leafgarland/typescript-vim'
+  Plug 'Quramy/tsuquyomi'
   Plug 'skywind3000/asyncrun.vim'
   Plug 'prettier/vim-prettier', { 'do': 'npm  install' }
+  Plug 'tpope/vim-commentary'
   
   " Search, Browsing and files
   Plug 'scrooloose/nerdtree' 
@@ -54,9 +56,6 @@ if s:running_neovim
   Plug 'pangloss/vim-javascript'
   Plug 'mxw/vim-jsx'
   Plug 'keith/swift.vim'
-
-  " For developer metrics
-  Plug 'wakatime/vim-wakatime'
 
   " Utils
   Plug 'AndrewRadev/linediff.vim'

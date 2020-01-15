@@ -1,0 +1,25 @@
+# ~/.tmuxinator/gh-servers.yml
+
+name: dm-servers
+root: <%= @settings["workspace"] %>
+
+# Optional tmux socket
+# socket_name: foo
+
+# 1) Pull latest changes down from master and rebase
+# 2) Install any missing npm dependencies
+on_project_first_start: WORK_DIRECTORY=<%= @settings["workspace"] %> ~/development/setup-scripts/pull-down-work-changes.sh
+
+# Don't attach automatically. It's gonna be running in the background
+attach: false
+
+windows:
+  - dm:
+      layout: even-horizontal 
+      panes:
+        - cd ~/<%= @settings["workspace"] %> && npm run dev 
+        - cd ~/<%= @settings["workspace"] %> && npm start 
+  - stream-loader:
+      layout: even-horizontal
+      panes:
+        - jump stream && mvn clean install 
