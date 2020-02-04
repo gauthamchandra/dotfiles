@@ -14,5 +14,4 @@ attach: true
 
 windows:
   - git: gs
-  - ghost: vim . 
-  - stream-api: jump stream 
+  - dev: vim . 

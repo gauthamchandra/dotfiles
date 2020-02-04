@@ -17,9 +17,5 @@ windows:
   - dm:
       layout: even-horizontal 
       panes:
-        - cd ~/<%= @settings["workspace"] %> && npm run dev 
-        - cd ~/<%= @settings["workspace"] %> && npm start 
-  - stream-loader:
-      layout: even-horizontal
-      panes:
-        - jump stream && mvn clean install 
+        - cd <%= @settings["workspace"] %> && npm run dev 
+        - cd <%= @settings["workspace"] %> && npm start 
