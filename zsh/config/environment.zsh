@@ -35,4 +35,7 @@ fi
 export DEFAULT_USER=`whoami`
 prompt_context() {}
 
-export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
+$(brew --prefix asdf)/asdf.sh
+
+# Set Java home from ASDF
+source ~/.asdf/plugins/java/set-java-home.zsh

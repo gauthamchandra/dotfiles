@@ -38,11 +38,6 @@ pip install typing # used for vim-vint
 pip install vim-vint
 brew install sourcekitten # used for autocomplete-swift
 pip install pyyaml
-pip3 install sexpdata websocket-client # used for ensime (scala)
-
-echo "Ensuring that SBT ensime plugin for Scala is installed"
-mkdir -p ~/.sbt/1.0/plugins && touch ~/.sbt/1.0/plugins/plugins.sbt
-echo 'addSbtPlugin("org.ensime" % "sbt-ensime" % "2.5.1")' >> ~/.sbt/1.0/plugins/plugins.sbt
 
 echo "Installing ctags and adding basic config to ~/.ctags"
 brew install ctags
@@ -59,6 +54,9 @@ curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
 
 echo "Installing Plugins..."
 nvim +PlugInstall +UpdateRemotePlugins +qall
+
+echo "Installing Completion Support for Languages"
+nvim -c 'CocInstall -sync coc-json coc-tsserver coc-eslint coc-metals|q'
 
 echo "Setting vimrc as executable"
 chmod +x vimrc

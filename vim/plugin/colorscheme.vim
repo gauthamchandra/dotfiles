@@ -7,4 +7,4 @@ augroup MyColors
     autocmd ColorScheme * call MyHighlights()
 augroup END
 
-colorscheme tender 
+colorscheme tender

@@ -22,18 +22,11 @@ if s:running_neovim
   " My Plugins
   
   " Editor stuff (autocomplete, editor config, etc.)
-  Plug 'neomake/neomake'
   Plug 'editorconfig/editorconfig-vim'
   Plug 'ludovicchabant/vim-gutentags'
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  Plug 'ensime/ensime-vim', { 'do': ':UpdateRemotePlugins' }
-  Plug 'fishbullet/deoplete-ruby'
-  Plug 'artur-shaik/vim-javacomplete2'
-  Plug 'mitsuse/autocomplete-swift'
-  Plug 'landaire/deoplete-swift'
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'leafgarland/typescript-vim'
-  Plug 'Quramy/tsuquyomi'
-  Plug 'skywind3000/asyncrun.vim'
+  Plug 'artur-shaik/vim-javacomplete2'
   Plug 'prettier/vim-prettier', { 'do': 'npm  install' }
   Plug 'tpope/vim-commentary'
   

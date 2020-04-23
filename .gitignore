@@ -11,3 +11,6 @@
 # Dont include auto-generated files for vim, tmux and zsh
 .netrwhist
 tmux-client-*.log
+
+# Ignore ctags
+tags
