@@ -73,6 +73,9 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 " Remap for rename current word
 nmap <leader>rn <Plug>(coc-rename)
 
+" Remap Organize imports to 'Ctrl + Option + o' (just like IntelliJ)
+nmap <C-A-o> :call CocAction('runCommand', 'editor.action.organizeImport')<cr>
+
 " Remap for format selected region
 xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)

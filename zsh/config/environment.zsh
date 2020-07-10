@@ -35,7 +35,10 @@ fi
 export DEFAULT_USER=`whoami`
 prompt_context() {}
 
-$(brew --prefix asdf)/asdf.sh
+source $(brew --prefix asdf)/asdf.sh
 
 # Set Java home from ASDF
 source ~/.asdf/plugins/java/set-java-home.zsh
+
+# Set Rust home
+source $HOME/.cargo/env
