@@ -49,6 +49,7 @@ if s:running_neovim
   Plug 'pangloss/vim-javascript'
   Plug 'mxw/vim-jsx'
   Plug 'keith/swift.vim'
+  Plug 'satabin/hocon-vim'
 
   " Utils
   Plug 'AndrewRadev/linediff.vim'
