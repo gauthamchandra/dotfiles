@@ -29,7 +29,7 @@ function install_deps() {
 
 function install_zim() {
   logInfo "Installing and configuring zim for a superior Zsh experience"
-  zsh && source $SCRIPT_DIR/install_zim.zsh
+  (exec $SCRIPT_DIR/install_zim.zsh)
 }
 
 function configure_autocompletion() {
@@ -73,11 +73,24 @@ function symlink_zimrc() {
   ln -s $SCRIPT_DIR/.zimrc $HOME/.zimrc
 }
 
+# For mac, 'rupa/z' tool is installed automatically when 'brew bundle' is installed.
+# As always, Linux requires extra work.
+function augment_shell_with_z_plugin_for_linux() {
+  if (( $(uname) == "Linux" )); then
+    logInfo "Downloading rupa/z for quick bouncing around into directories"
+    mkdir -p ~/shell-scripts
+    wget https://raw.githubusercontent.com/rupa/z/master/z.sh -O ~/shell-scripts/z.sh
+    echo ". ~/shell-scripts/z.sh" >> ~/.bashrc
+    echo ". ~/shell-scripts/z.sh" >> ~/.zshrc
+  fi
+}
+
 install_deps
 install_zim
 configure_autocompletion
 configure_autosourcer
 symlink_zimrc
+augment_shell_with_z_plugin_for_linux
 
 logInfo "Adding config to .zshrc"
 echo "ZSH_CUSTOM=${SCRIPT_DIR}/config" >> $HOME/.zshrc
