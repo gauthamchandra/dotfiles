@@ -11,12 +11,16 @@ setopt AUTO_PARAM_SLASH    # If completed parameter is a directory, add a traili
 setopt EXTENDED_GLOB       # Needed for file modification glob modifiers with compinit
 setopt ALIASES             # Make aliases available to shell scripts
 
-if [ "$(uname)" = "Darwin" ]; then
+if uname | grep -q "Darwin"; then
   # Use brew libs over system libs
   export PATH=$PATH:/usr/local/bin
 
   # Use brew's version of vim if we are on OSX
   alias vim="/usr/local/bin/vim"
+
+  $(brew --prefix asdf)/asdf.sh
+else
+  export PATH=$PATH:~/.rbenv/bin
 fi
 
 # If tmuxinator completion exists, add it to zsh
@@ -35,10 +39,7 @@ fi
 export DEFAULT_USER=`whoami`
 prompt_context() {}
 
-source $(brew --prefix asdf)/asdf.sh
-
-# Set Java home from ASDF
-source ~/.asdf/plugins/java/set-java-home.zsh
-
-# Set Rust home
-source $HOME/.cargo/env
+# Set Java home from ASDF if Java is installed
+if [ -f "~/.asdf/plugins/java/set-java-home.zsh" ]; then
+  source ~/.asdf/plugins/java/set-java-home.zsh
+fi

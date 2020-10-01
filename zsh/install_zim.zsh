@@ -3,6 +3,8 @@
 # make sure to exit on error
 set -euo pipefail
 
+setopt EXTENDED_GLOB
+
 SCRIPT_DIR="${0:a:h}"
 source $SCRIPT_DIR/../util.sh
 

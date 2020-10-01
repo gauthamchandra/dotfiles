@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 CURRENT_DIR="`dirname $0`"
 source $CURRENT_DIR/pre-commit-stop-ship.sh

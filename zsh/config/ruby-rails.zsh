@@ -3,8 +3,12 @@
 # Initialize rbenv
 eval "$(rbenv init -)"
 
-# Specify OpenSSL cert location for ruby
-export SSL_CERT_FILE=/usr/local/etc/openssl/cert.pem
+# Don't set this ENV var in linux. The certs are in a different 
+# place and it will mess with curl requests
+if uname | grep -q "Darwin"; then
+  # Specify OpenSSL cert location for ruby
+  export SSL_CERT_FILE=/usr/local/etc/openssl/cert.pem
+fi
 
 # General Rails stuff
 alias rspec="bundle exec rspec"
