@@ -41,9 +41,30 @@ function install_development_deps() {
   
   set -euo pipefail
 
+  logInfo "Installing docker"
+  sudo apt install apt-transport-https ca-certificates gnupg-agent software-properties-common -y
+  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+  sudo add-apt-repository \
+    "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+    $(lsb_release -cs) \
+    stable"
+  sudo apt update
+  sudo apt install docker-ce docker-ce-cli containerd.io -y
+  docker -v
+
+  logInfo "Installing docker-compose"
+  sudo curl -L "https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+  sudo chmod +x /usr/local/bin/docker-compose
+
+  logInfo "Setting up docker so that it can be run as a non-root user"
+  sudo usermod -aG docker ${USER}
+  logWarning "User '${USER}' has been added to the docker group 'docker'. For changes to take effect, please log out and log back in!"
+  sudo systemctl restart docker
+
   logInfo "Installing all necessary dev tools for day-to-day work"
-  sudo apt install zsh hub tmux tree silversearcher-ag fzf awscli redis fzf xbindkeys -y
+  sudo apt install zsh hub tmux tree silversearcher-ag fzf awscli redis fzf xbindkeys libpq-dev zeal -y
   sudo snap install --classic heroku
+  sudo snap install postman
 
   logInfo "Installing a MUCH better, more performant terminal" 
   sudo apt install xdotool wmctrl alacritty -y
@@ -83,7 +104,9 @@ function install_development_deps() {
 }
 
 function install_core_apps() {
-  sudo snap install spotify  
+  sudo snap install spotify libreoffice inkscape
+  sudo snap install slack --classic
+  sudo apt install gpick gparted -y
 }
 
 install_core_deps

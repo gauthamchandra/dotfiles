@@ -96,3 +96,7 @@ command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 
 " Add status line support, for integration with other plugins, checkout `:h coc-status`
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
+" Only way for coc-tsserver to recognize that this is a typescript file that
+" has JSX
+" autocmd BufNewFile,BufRead *.tsx set filetype=typescriptreact

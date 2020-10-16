@@ -25,6 +25,7 @@ if s:running_neovim
   Plug 'editorconfig/editorconfig-vim'
   Plug 'ludovicchabant/vim-gutentags'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  Plug 'neoclide/coc-eslint'
   Plug 'leafgarland/typescript-vim'
   Plug 'artur-shaik/vim-javacomplete2'
   Plug 'prettier/vim-prettier', { 'do': 'npm  install' }

@@ -46,6 +46,7 @@ ln -s `pwd`/.ctags ~/.ctags
 echo "Installing linters so it can be used for vim via neomake"
 npm install -g eslint
 gem install rubocop
+gem install solargraph
 brew install swiftlint
 
 echo "Installing vim-plug"
@@ -56,7 +57,7 @@ echo "Installing Plugins..."
 nvim +PlugInstall +UpdateRemotePlugins +qall
 
 echo "Installing Completion Support for Languages"
-nvim -c 'CocInstall -sync coc-json coc-tsserver coc-eslint coc-metals|q'
+nvim -c 'CocInstall -sync coc-json coc-tsserver coc-eslint coc-metals coc-solargraph|q'
 
 echo "Setting vimrc as executable"
 chmod +x vimrc

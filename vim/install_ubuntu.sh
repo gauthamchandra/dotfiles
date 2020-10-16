@@ -27,6 +27,7 @@ cd $SCRIPT_DIR
 
 echo "Symlinking 'init.vim' => ~/.config/nvim/init.vim"
 mkdir -p ${NVIM_CONFIG_DIR} && ln -s `pwd`/init.vim ${NVIM_CONFIG_DIR}/init.vim
+mkdir -p ${NVIM_CONFIG_DIR}/after && ln -s `pwd`/ftplugin ${NVIM_CONFIG_DIR}/after/ftplugin
 
 echo "Symlinking dir => ~/.vim/"
 ln -s `pwd` ~/.vim
@@ -39,6 +40,8 @@ echo "Installing plugin dependencies"
 pip install typing # used for vim-vint
 pip install vim-vint
 pip install pyyaml
+gem install solargraph
+gem install solargraph
 sudo apt install exuberant-ctags -y
 
 echo "Installing vim-plug"
@@ -49,7 +52,7 @@ echo "Installing Plugins..."
 nvim +PlugInstall +UpdateRemotePlugins +qall
 
 echo "Installing Completion Support for Languages"
-nvim -c 'CocInstall -sync coc-json coc-tsserver coc-eslint coc-metals|q'
+nvim -c 'CocInstall -sync coc-json coc-tsserver coc-eslint coc-metals coc-solargraph|q'
 
 echo "Setting vimrc as executable"
 chmod +x .vimrc
