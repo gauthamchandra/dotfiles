@@ -9,7 +9,7 @@ echo "Installing tmuxinator"
 gem install tmuxinator
 
 echo "Downloading muxinator completion file for zsh"
-wget "https://raw.githubusercontent.com/tmuxinator/tmuxinator/master/completion/tmuxinator.zsh"
+wget --no-check-certificate "https://raw.githubusercontent.com/tmuxinator/tmuxinator/master/completion/tmuxinator.zsh"
 mkdir -p ~/.bin && mv tmuxinator.zsh ~/.bin/tmuxinator.zsh
 
 echo "Adding a setup script used by the muxinator config to the proper place"

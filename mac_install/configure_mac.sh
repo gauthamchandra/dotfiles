@@ -6,10 +6,6 @@ MAXFILES_PLIST_LOCATION=/Library/LaunchDaemons/limit.maxfiles.plist
 MAXPROC_PLIST_LOCATION=/Library/LaunchDaemons/limit.maxproc.plist
 SSH_CONFIG_LOCATION=~/.ssh/config
 
-is_mac_os() {
-  "$(uname)" == "Darwin"
-}
-
 echo "Configuring Finder to show all files (including hidden)"
 defaults write com.apple.finder AppleShowAllFiles YES
 
@@ -33,7 +29,7 @@ else
   sudo launchctl load /Library $MAXPROC_PLIST_LOCATION
 fi
 
-if is_mac_os; then
+if [[ "$OSTYPE" == "darwin"* ]]; then
   echo "Mac OS detected. Checking if SSH config exists."
   echo "If it doesn't, some basic defaults will be copied like saving the private key to the Keychain"
 
