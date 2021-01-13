@@ -3,6 +3,7 @@
 
 # Don't include work stuff
 **/*/greenhouse.zsh
+**/*.private.yml
 
 # Don't include keystores
 **/*.keystore

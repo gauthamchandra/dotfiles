@@ -14,6 +14,8 @@ setopt ALIASES             # Make aliases available to shell scripts
 if uname | grep -q "Darwin"; then
   # Use brew libs over system libs
   export PATH=$PATH:/usr/local/bin
+  
+  export PATH="$PATH:$(yarn global bin)"
 
   # Use brew's version of vim if we are on OSX
   alias vim="/usr/local/bin/vim"
@@ -27,6 +29,7 @@ fi
 TMUXINATOR_COMPLETION_FILE=~/.bin/tmuxinator.zsh
 if [ -f "$TMUXINATOR_COMPLETION_FILE" ]; then
   source $TMUXINATOR_COMPLETION_FILE 
+  alias mux="tmuxinator"
 fi
 
 if command -v nvim >/dev/null 2>&1; then
@@ -40,6 +43,6 @@ export DEFAULT_USER=`whoami`
 prompt_context() {}
 
 # Set Java home from ASDF if Java is installed
-if [ -f "~/.asdf/plugins/java/set-java-home.zsh" ]; then
+if [ -f "$HOME/.asdf/plugins/java/set-java-home.zsh" ]; then
   source ~/.asdf/plugins/java/set-java-home.zsh
 fi

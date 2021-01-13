@@ -47,8 +47,10 @@ if s:running_neovim
   Plug 'jacoborus/tender.vim'
   
   " For proper syntax highlighting 
-  Plug 'pangloss/vim-javascript'
-  Plug 'mxw/vim-jsx'
+  "Plug 'pangloss/vim-javascript'
+  " Use the above line one this PR is merged: https://github.com/leafgarland/typescript-vim/pull/171
+  Plug 'iwikal/typescript-vim', { 'branch': 'typescriptreact' }
+  Plug 'peitalin/vim-jsx-typescript'
   Plug 'keith/swift.vim'
   Plug 'satabin/hocon-vim'
 
