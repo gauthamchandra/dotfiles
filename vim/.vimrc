@@ -52,6 +52,7 @@ if s:running_neovim
   Plug 'iwikal/typescript-vim', { 'branch': 'typescriptreact' }
   Plug 'peitalin/vim-jsx-typescript'
   Plug 'keith/swift.vim'
+  Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
   Plug 'satabin/hocon-vim'
 
   " Utils

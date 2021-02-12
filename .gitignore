@@ -1,5 +1,6 @@
 # Don't include any files that contain API keys and such
 **/*/private.zsh
+**/*/*.private.zsh
 
 # Don't include work stuff
 **/*/greenhouse.zsh
