@@ -40,4 +40,8 @@ repeat_command() {
   for i in {1..$RETRIES}; do eval $COMMAND; sleep $PAUSE_INTERVAL; done
 }
 
+tmux_layouts() {
+  tmux list-windows | sed -n 's/.*layout \(.*\)] @.*/\1/p'
+}
+
 alias clear-vim-swaps='ls  ~/.local/share/nvim/swap | grep ".swp" | xargs -I swap_file rm ~/.local/share/nvim/swap/swap_file'
