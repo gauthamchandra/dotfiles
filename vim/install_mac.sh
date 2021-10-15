@@ -14,7 +14,6 @@ brew install python3
 
 echo "Installing neovim plugins for Ruby and Python"
 gem install neovim
-pip install neovim
 pip3 install neovim
 
 cd $SCRIPT_DIR
@@ -33,11 +32,15 @@ echo "Symlinking xvimrc => ~/.xvimrc (for Xcode)"
 chmod +x `pwd`/.xvimrc
 ln -s `pwd`/.xvimrc ~/.xvimrc
 
+echo "Symlinking ideavimrc => ~/.ideavimrc (for IntelliJ)"
+chmod +x `pwd`/.ideavimrc
+ln -s `pwd`/.ideavimrc ~/.ideavimrc
+
 echo "Installing plugin dependencies"
-pip install typing # used for vim-vint
-pip install vim-vint
+pip3 install typing # used for vim-vint
+pip3 install vim-vint
 brew install sourcekitten # used for autocomplete-swift
-pip install pyyaml
+pip3 install pyyaml
 
 echo "Installing ctags and adding basic config to ~/.ctags"
 brew install ctags

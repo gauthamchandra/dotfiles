@@ -9,8 +9,8 @@ source $SCRIPT_DIR/../util.sh
 
 function install_deps() {
   logInfo "Installing Python and powerline"
-  pip install --upgrade pip setuptools
-  pip install powerline-status
+  pip3 install --upgrade setuptools
+  pip3 install powerline-status
   npm install --global pure-prompt # For the "pure" prompt. See: https://github.com/sindresorhus/pure
 
   mkdir -p $HOME/bin/
@@ -87,6 +87,9 @@ function augment_shell_with_z_plugin_for_linux() {
     wget https://raw.githubusercontent.com/rupa/z/master/z.sh -O ~/shell-scripts/z.sh
     echo ". ~/shell-scripts/z.sh" >> ~/.bashrc
     echo ". ~/shell-scripts/z.sh" >> ~/.zshrc
+  else
+    logInfo "Assuming OSX and adding Z to ~/.zshrc"
+    echo ". $(brew --prefix)/etc/profile.d/z.sh" >> ~/.zshrc
   fi
 }
 
@@ -105,6 +108,9 @@ echo "export PATH=$PATH:~/bin" >> $HOME/.zshrc
 
 logInfo "Sourcing file"
 source $HOME/.zshrc
+
+logInfo "Running 'zimfw install' for good measure"
+zimfw install
 
 logWarning "IMPORTANT: For iTerm2 users, remember to change the font to one of the installed powerline fonts in Preferences!" 
 logInfo "Done!"

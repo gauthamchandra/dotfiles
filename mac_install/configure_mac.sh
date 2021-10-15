@@ -40,6 +40,6 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     cp $SCRIPT_DIR/mac_ssh_default_config $SSH_CONFIG_LOCATION    
 
     echo "Telling SSH Agent to store the key in the Keychain so you won't get prompted on every boot"
-    ssh-add -K ~/.ssh/id_rsa
+    ssh-add -K ~/.ssh/id_ed25519
   fi
 fi

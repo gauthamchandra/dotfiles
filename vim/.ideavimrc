@@ -1,0 +1,23 @@
+" vimrc file specifically tailored for IntelliJ 
+" (for when its unavoidable like Java)
+set clipboard+=unnamedplus
+
+" Change tabs to spaces so everything is consisent formatting wise
+set expandtab
+
+# show what vim mode we are in
+set showmode
+
+" When searching, ensure it highlights and keeps searching as you type without
+" you hitting enter
+set incsearch
+set hlsearch
+
+""" Enable 'emulated' vim plugins
+" @see: https://github.com/JetBrains/ideavim/wiki/Emulated-plugins
+set commentary
+
+""" Idea specific settings ------------------
+set ideajoin
+set ideastatusicon=gray
+set idearefactormode=keep
