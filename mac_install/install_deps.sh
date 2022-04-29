@@ -50,8 +50,8 @@ function install_languages_and_tooling() {
   asdf global python 3.6.2 2.7.13
 
   logInfo "Installing NodeJS and NPM"
-  bash -c '${ASDF_DATA_DIR:=$HOME/.asdf}/plugins/nodejs/bin/import-release-team-keyring'
   asdf plugin add nodejs
+  bash -c '${ASDF_DATA_DIR:=$HOME/.asdf}/plugins/nodejs/bin/import-release-team-keyring'
   asdf install nodejs 12.19.0
   asdf global nodejs 12.19.0
 
