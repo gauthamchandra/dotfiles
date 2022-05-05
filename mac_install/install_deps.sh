@@ -23,7 +23,6 @@ function install_cli_tools() {
   sudo xcode-select -switch /Applications/Xcode.app/Contents/Developer
 }
 
-
 function install_brew_and_dependencies() {
   if which brew; then
     logInfo "Brew installed. Skipping installation"
@@ -42,41 +41,83 @@ function install_brew_and_dependencies() {
   cd $HOME && brew bundle
 }
 
+
+function install_m1_specific_tools_if_detected() {
+  if uname -p | grep -q arm; then
+    logInfo "M1 Mac Detected. Beginning installation of core libraries needed for development"
+    logInfo "Installing Rosetta 2 for emulating x86 only binaries via the 'arch' command"
+    sudo softwareupdate --install-rosetta --agree-to-license
+
+    logInfo "Installing gettext as it is bundled with 'old' x86 homebrew but not ARM homebrew"
+    brew install gettext
+
+    logInfo "Installing core binaries like openssl so they don't botch installs like ruby later on"
+    brew update
+    brew install -s readline openssl ruby-build
+    brew upgrade ruby-build
+
+    logInfo "Downgrading to an older version of openssl so ruby-build can succeed (due to compatibility differences)"
+    brew install openssl@1.1 && brew unlink openssl && brew link openssl@1.1 --force
+
+    logInfo "Setting LDFLAGS, CPPFLAGS and optflags to point to homebrew"
+    export LDFLAGS="-L/opt/homebrew/lib";
+    export CPPFLAGS="-I/opt/homebrew/include"
+    export optflags="-Wno-error=implicit-function-declaration"
+
+    logInfo "Setting PYTHON_CONFIGURE_OPTS to build the 'universal' version when installing"
+    export PYTHON_CONFIGURE_OPTS="--enable-framework --enable-universalsdk --with-universal-archs=universal2"
+
+    logInfo "Setting RUBY_CONFIGURE_OPTS to point to Homebrew's version of openssl"
+    export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1) --with-opt-dir=$(brew --prefix readline) --without-tcl --without-tk"
+
+    logInfo "Also setting CFLAGS to handle implicit funcs for ruby versions < 3.0 that don't have implicit M1 support"
+    export CFLAGS="-Wno-error=implicit-function-declaration -w"
+    export PKG_CONFIG_PATH=$(brew --prefix openssl@1.1)/lib/pkgconfig
+  fi
+}
+
+
 function install_languages_and_tooling() {
   logInfo "Installing Python"
-  asdf plugin add python
-  asdf install python 3.6.2
-  asdf install python 2.7.13
-  asdf global python 3.6.2 2.7.13
+  (asdf list | grep -q python) || asdf plugin add python
+  asdf install python 3.10.4
+  asdf global python 3.10.4
 
   logInfo "Installing NodeJS and NPM"
-  asdf plugin add nodejs
-  bash -c '${ASDF_DATA_DIR:=$HOME/.asdf}/plugins/nodejs/bin/import-release-team-keyring'
-  asdf install nodejs 12.19.0
-  asdf global nodejs 12.19.0
+  (asdf list | grep -q nodejs) || asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
+  asdf install nodejs 16.15.0 
+  asdf global nodejs 16.15.0 
 
   logInfo "Installing Ruby"
-  asdf plugin add ruby
+  (asdf list | grep -q ruby) || asdf plugin add ruby 
+  echo "RUBY_CONFIGURE_OPTS=$RUBY_CONFIGURE_OPTS"
   asdf install ruby 2.7.1
   asdf global ruby 2.7.1
 
-  touch ~/.bash_profile
-  echo "# For ASDF plugin manager" >> ~/.bash_profile
-  echo -e "\n. $(brew --prefix asdf)/asdf.sh" >> ~/.bash_profile
-  echo -e "\n. $(brew --prefix asdf)/etc/bash_completion.d/asdf.bash" >> ~/.bash_profile
-  echo -e "export PATH=$HOME/.asdf/shims:$PATH" >> ~/.bashrc
+  touch ~/.zshrc
+  echo "# For ASDF plugin manager" >> ~/.zshrc
+  echo -e "\n. $(brew --prefix asdf)/asdf.sh" >> ~/.zshrc
+  #echo -e "\n. $(brew --prefix asdf)/etc/bash_completion.d/asdf.bash" >> ~/.zshrc
+  echo -e "export PATH=$HOME/.asdf/shims:$PATH" >> ~/.zshrc
 }
 
 function install_docker() {
   logInfo "Installing Docker"
-  wget https://desktop.docker.com/mac/stable/Docker.dmg -O ~/Downloads/docker.dmg
+
+  if uname -p | grep -q arm; then
+    echo "Downloading Docker for Mac (M1 edition)"
+    wget 'https://desktop.docker.com/mac/main/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64' -O ~/Downloads/docker.dmg 
+  else
+    echo "Downloading Docker for Mac (Intel edition)"
+    wget https://desktop.docker.com/mac/stable/Docker.dmg -O ~/Downloads/docker.dmg  
+  fi
+  
   local volume=`hdiutil attach ~/Downloads/docker.dmg | grep Volumes | awk '{print $3}'`
-  ls -la $volume
   echo cp -rf $volume/*.app /Applications
   cp -rf $volume/*.app /Applications
   hdiutil detach $volume
 
-  open /Applications/Docker/*.app
+  open /Applications/Docker.app
 }
 
 function install_and_configure_alacritty() {
@@ -88,10 +129,10 @@ function install_and_configure_alacritty() {
 }
 
 install_cli_tools
+install_m1_specific_tools_if_detected
 install_brew_and_dependencies
 install_languages_and_tooling
 install_docker
 install_and_configure_alacritty
 
-logInfo "Be sure to run 'rbenv init' and follow the instructions to setup rbenv"
 logInfo "Done"
