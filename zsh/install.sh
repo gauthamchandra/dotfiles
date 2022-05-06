@@ -74,6 +74,11 @@ function configure_autosourcer() {
 }
 
 function symlink_zimrc() {
+  if [ -f "$HOME/.zimrc" ]; then
+    echo "~/.zimrc exists already. It was probably installed by the zim installer. Deleting so we can replace with our own"
+    rm ~/.zimrc
+  fi
+
   logInfo "Symlinking .zimrc -> ~/.zimrc"
   ln -s $SCRIPT_DIR/.zimrc $HOME/.zimrc
 }
@@ -81,15 +86,15 @@ function symlink_zimrc() {
 # For mac, 'rupa/z' tool is installed automatically when 'brew bundle' is installed.
 # As always, Linux requires extra work.
 function augment_shell_with_z_plugin_for_linux() {
-  if (( $(uname) == "Linux" )); then
+  if uname | grep -q "Darwin"; then
+    logInfo "Assuming OSX and adding Z to ~/.zshrc"
+    echo ". $(brew --prefix)/etc/profile.d/z.sh" >> ~/.zshrc
+  else
     logInfo "Downloading rupa/z for quick bouncing around into directories"
     mkdir -p ~/shell-scripts
     wget https://raw.githubusercontent.com/rupa/z/master/z.sh -O ~/shell-scripts/z.sh
     echo ". ~/shell-scripts/z.sh" >> ~/.bashrc
     echo ". ~/shell-scripts/z.sh" >> ~/.zshrc
-  else
-    logInfo "Assuming OSX and adding Z to ~/.zshrc"
-    echo ". $(brew --prefix)/etc/profile.d/z.sh" >> ~/.zshrc
   fi
 }
 

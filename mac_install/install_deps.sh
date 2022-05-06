@@ -39,6 +39,13 @@ function install_brew_and_dependencies() {
 
   logInfo "Installing all brew dependencies..."
   cd $HOME && brew bundle
+
+  logInfo 'Ensuring the path to the "cacerts.pem" file is set as an ENV var for openssl to find'
+  ln -s `brew --prefix`/etc/openssl@1.1/cert.pem `brew --prefix`/etc/openssl@1.1/certs/cacerts.pem
+  `brew --prefix openssl@1.1`/bin/c_rehash
+
+  echo -e "\n# Ensure OpenSSL and any dependent libraries pick up the cacerts.pem file" >> ~/.zshrc
+  echo -e "export SSL_CERT_FILE=$(brew --prefix)/etc/openssl@1.1/cert.pem" >> ~/.zshrc
 }
 
 
@@ -88,6 +95,9 @@ function install_languages_and_tooling() {
   asdf install nodejs 16.15.0 
   asdf global nodejs 16.15.0 
 
+  logInfo "Installing yarn"
+  npm install -g yarn
+
   logInfo "Installing Ruby"
   (asdf list | grep -q ruby) || asdf plugin add ruby 
   echo "RUBY_CONFIGURE_OPTS=$RUBY_CONFIGURE_OPTS"
@@ -95,10 +105,12 @@ function install_languages_and_tooling() {
   asdf global ruby 2.7.1
 
   touch ~/.zshrc
-  echo "# For ASDF plugin manager" >> ~/.zshrc
-  echo -e "\n. $(brew --prefix asdf)/asdf.sh" >> ~/.zshrc
-  #echo -e "\n. $(brew --prefix asdf)/etc/bash_completion.d/asdf.bash" >> ~/.zshrc
+  echo '# For ASDF plugin manager' >> ~/.zshrc
+  echo -e "\n. $(brew --prefix asdf)/libexec/asdf.sh" >> ${ZDOTDIR:-~}/.zshrc
   echo -e "export PATH=$HOME/.asdf/shims:$PATH" >> ~/.zshrc
+
+  # not sure why but recent installs of asdf don't actually make the asdf script executable. Probably a bug
+  chmod a+x $(brew --prefix asdf)/libexec/asdf.sh
 }
 
 function install_docker() {

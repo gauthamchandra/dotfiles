@@ -46,3 +46,11 @@ prompt_context() {}
 if [ -f "$HOME/.asdf/plugins/java/set-java-home.zsh" ]; then
   source ~/.asdf/plugins/java/set-java-home.zsh
 fi
+
+# Ensure it uses openssl@1.1 libs
+# For compilers to find openssl@1.1 you may need to set:
+export LDFLAGS="-L$(brew --prefix openssl@1.1)/lib"
+export CPPFLAGS="-I$(brew --prefix openssl@1.1)/include"
+
+# For pkg-config to find openssl@1.1 you may need to set:
+export PKG_CONFIG_PATH="$(brew --prefix openssl@1.1)/lib/pkgconfig"
