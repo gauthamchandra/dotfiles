@@ -63,7 +63,7 @@ echo "Installing Completion Support for Languages"
 nvim -c 'CocInstall -sync coc-json coc-tsserver coc-eslint coc-metals coc-solargraph|q'
 
 echo "Setting vimrc as executable"
-chmod +x vimrc
+chmod +x .vimrc
 
 echo "Done."
 echo "Remember to alias vim to nvim!"
