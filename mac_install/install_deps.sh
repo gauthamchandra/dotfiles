@@ -40,12 +40,14 @@ function install_brew_and_dependencies() {
   logInfo "Installing all brew dependencies..."
   cd $HOME && brew bundle
 
-  logInfo 'Ensuring the path to the "cacerts.pem" file is set as an ENV var for openssl to find'
-  ln -s `brew --prefix`/etc/openssl@1.1/cert.pem `brew --prefix`/etc/openssl@1.1/certs/cacerts.pem
-  `brew --prefix openssl@1.1`/bin/c_rehash
+  if [ ! -f "$(brew --prefix)/etc/openssl@1.1/certs/cacerts.pem" ]; then
+    logInfo 'Ensuring the path to the "cacerts.pem" file is set as an ENV var for openssl to find'
+    ln -s `brew --prefix`/etc/openssl@1.1/cert.pem `brew --prefix`/etc/openssl@1.1/certs/cacerts.pem
+    `brew --prefix openssl@1.1`/bin/c_rehash
+  fi
 
-  echo -e "\n# Ensure OpenSSL and any dependent libraries pick up the cacerts.pem file" >> ~/.zshrc
-  echo -e "export SSL_CERT_FILE=$(brew --prefix)/etc/openssl@1.1/cert.pem" >> ~/.zshrc
+  echo "\n# Ensure OpenSSL and any dependent libraries pick up the cacerts.pem file" >> ~/.zshrc
+  echo "export SSL_CERT_FILE=$(brew --prefix)/etc/openssl@1.1/cert.pem" >> ~/.zshrc
 }
 
 
@@ -67,31 +69,48 @@ function install_m1_specific_tools_if_detected() {
     brew install openssl@1.1 && brew unlink openssl && brew link openssl@1.1 --force
 
     logInfo "Setting LDFLAGS, CPPFLAGS and optflags to point to homebrew"
-    export LDFLAGS="-L/opt/homebrew/lib";
+    cat <<- 'EOF' >> ~/.zshrc
+    # Setting LDFLAGS, CPPFLAGS and optflags to point to homebrew
+    export LDFLAGS="-L/opt/homebrew/lib"
     export CPPFLAGS="-I/opt/homebrew/include"
     export optflags="-Wno-error=implicit-function-declaration"
+EOF
 
     logInfo "Setting PYTHON_CONFIGURE_OPTS to build the 'universal' version when installing"
+    cat <<- 'EOF' >> ~/.zshrc
+
+    # Setting PYTHON_CONFIGURE_OPTS to build the 'universal' version when installing
     export PYTHON_CONFIGURE_OPTS="--enable-framework --enable-universalsdk --with-universal-archs=universal2"
+EOF
 
     logInfo "Setting RUBY_CONFIGURE_OPTS to point to Homebrew's version of openssl"
+    cat <<- 'EOF' >> ~/.zshrc
+
+    # Setting RUBY_CONFIGURE_OPTS to point to Homebrew's version of openssl
     export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1) --with-opt-dir=$(brew --prefix readline) --without-tcl --without-tk"
+EOF
 
     logInfo "Also setting CFLAGS to handle implicit funcs for ruby versions < 3.0 that don't have implicit M1 support"
+    cat <<- 'EOF' >> ~/.zshrc
+
     export CFLAGS="-Wno-error=implicit-function-declaration -w"
     export PKG_CONFIG_PATH=$(brew --prefix openssl@1.1)/lib/pkgconfig
+EOF
+
+    # Now source zshrc for good measure
+    source ~/.zshrc
   fi
 }
 
 
 function install_languages_and_tooling() {
   logInfo "Installing Python"
-  (asdf list | grep -q python) || asdf plugin add python
+  (asdf plugin list | grep -q python) || asdf plugin add python
   asdf install python 3.10.4
   asdf global python 3.10.4
 
   logInfo "Installing NodeJS and NPM"
-  (asdf list | grep -q nodejs) || asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
+  (asdf plugin list | grep -q nodejs) || asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
   asdf install nodejs 16.15.0 
   asdf global nodejs 16.15.0 
 
@@ -99,15 +118,14 @@ function install_languages_and_tooling() {
   npm install -g yarn
 
   logInfo "Installing Ruby"
-  (asdf list | grep -q ruby) || asdf plugin add ruby 
-  echo "RUBY_CONFIGURE_OPTS=$RUBY_CONFIGURE_OPTS"
+  (asdf plugin list | grep -q ruby) || asdf plugin add ruby 
   asdf install ruby 2.7.1
   asdf global ruby 2.7.1
 
   touch ~/.zshrc
   echo '# For ASDF plugin manager' >> ~/.zshrc
-  echo -e "\n. $(brew --prefix asdf)/libexec/asdf.sh" >> ${ZDOTDIR:-~}/.zshrc
-  echo -e "export PATH=$HOME/.asdf/shims:$PATH" >> ~/.zshrc
+  echo "\n. $(brew --prefix asdf)/libexec/asdf.sh" >> ${ZDOTDIR:-~}/.zshrc
+  echo "export PATH=$HOME/.asdf/shims:$PATH" >> ~/.zshrc
 
   # not sure why but recent installs of asdf don't actually make the asdf script executable. Probably a bug
   chmod a+x $(brew --prefix asdf)/libexec/asdf.sh
