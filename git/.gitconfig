@@ -1,8 +1,8 @@
 [user]
 	name = Gautham Chandra
-	email = gchandra@dataminr.com
+	email = gautham.chandra@live.com
 [core]
-	excludesfile = /Users/gautham.chandra/.gitignore_global
+	excludesfile = /Users/gauthamchandra/.gitignore_global
 [filter "lfs"]
 	clean = git lfs clean %f
 	smudge = git lfs smudge %f
