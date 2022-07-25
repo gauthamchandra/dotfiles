@@ -109,7 +109,7 @@ logInfo "Adding config to .zshrc"
 echo "ZSH_CUSTOM=${SCRIPT_DIR}/config" >> $HOME/.zshrc
 
 logInfo "Adding ~/bin to .zshrc"
-echo "export PATH=$PATH:~/bin" >> $HOME/.zshrc
+echo 'export PATH=$PATH:~/bin' >> $HOME/.zshrc
 
 logInfo "Sourcing file"
 source $HOME/.zshrc
