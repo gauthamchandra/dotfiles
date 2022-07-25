@@ -62,6 +62,9 @@ if s:running_neovim
   Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
   Plug 'satabin/hocon-vim'
 
+  " For Terraform support"
+  Plug 'hashivim/vim-terraform'
+
   " Utils
   Plug 'AndrewRadev/linediff.vim'
   
