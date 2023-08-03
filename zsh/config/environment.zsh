@@ -19,8 +19,6 @@ if uname | grep -q "Darwin"; then
 
   # Use brew's version of vim if we are on OSX
   alias vim="/usr/local/bin/vim"
-
-  $(brew --prefix asdf)/asdf.sh
 else
   export PATH=$PATH:~/.rbenv/bin
 fi
