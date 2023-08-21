@@ -37,6 +37,7 @@ if s:running_neovim
   Plug 'artur-shaik/vim-javacomplete2'
   Plug 'prettier/vim-prettier', { 'do': 'npm  install' }
   Plug 'tpope/vim-commentary'
+  Plug 'github/copilot.vim'
   
   " Search, Browsing and files
   Plug 'scrooloose/nerdtree' 
